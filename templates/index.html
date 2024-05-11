@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<!-- issues with api account request. -->
+
+<body>
+    <!-- page title -->
+    <h1>Currency Converter.</h1>
+    <h2> Enter two currencies, an amount, and convert.</h2>
+    <br>
+
+    <!-- Currency Converter Form -->
+    <section id="converter_form">
+
+        <form action="/convert" method="post">
+
+            <div>
+                <!-- select input for "Convert From" currency -->
+                <label for="from_currency">Convert from:</label>
+                <select name="from_currency" id="from_currency">
+                    {% for currency in currencies %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <!-- select input for "Convert To" currency -->
+                <label for="to_currency">Convert to:</label>
+                <select name="to_currency" id="to_currency">
+                    {% for currency in currencies %}
+                    <option value="{{ currency }}">{{ currency }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <!-- input field for amount to convert -->
+                <label for="amount">Amount:</label>
+                <input type="number" name="amount" id="amount">
+            </div>
+
+            <div>
+                <!-- submit button for conversion -->
+                <button type="submit">Convert</button>
+            </div>
+        </form>
+
+    </section>
+
+    <!-- messages display section -->
+    <div id="messages">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+</body>
+
+</html>
